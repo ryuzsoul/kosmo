@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>Kosmo</display-name>
+  
+  <!-- Taglib tld location -->
+  <jsp-config>
+    <taglib>
+      <taglib-uri>myTagLibTld</taglib-uri>
+      <taglib-location>/WEB-INF/tlds/MyTagLib.tld</taglib-location>
+    </taglib>
+  </jsp-config>
+  
+   <!-- Server connection -->
+   <context-param>
+  	<param-name>JDBCDriver</param-name>
+  	<param-value>oracle.jdbc.OracleDriver</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>ConnectionURL</param-name>
+  	<param-value>jdbc:oracle:thin:@localhost:1521:orcl</param-value>
+  </context-param>
+  
+    <!-- Pagination -->
+    <context-param>
+    <param-name>PAGE_SIZE</param-name>
+    <param-value>7</param-value>
+  </context-param>  
+  <context-param>
+    <param-name>BLOCK_PAGE</param-name>
+    <param-value>3</param-value>
+  </context-param>
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
