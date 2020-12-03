@@ -1,5 +1,7 @@
 package eltag;
 
+import model.MemberDAO;
+
 /**
  * taglib 사용시 public static 적용
  * tag library descriptor 선언, WEB-INF 하위에 tld파일 생성
@@ -49,5 +51,11 @@ public class MyTagLib {
 		boolean result1 = isNumber("1234");
 		boolean result2 = isNumber("20백");
 		System.out.println(result1+" "+result2);
+	}
+	
+	public static boolean memberLogin(String id, String pw, String drv, String url) {
+		MemberDAO dao = new MemberDAO(drv, url);
+		boolean isBool = dao.isMember(id, pw);
+		return isBool;
 	}
 }
