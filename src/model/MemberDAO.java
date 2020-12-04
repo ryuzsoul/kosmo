@@ -100,14 +100,13 @@ public class MemberDAO {
 		return dto;
 	}
 	
-	public Map<String, String> getMemberMap(String id, String pwd) {
+	public Map<String, String> getMemberMap(String id) {
 		Map<String, String> maps = new HashMap<String, String>();
 		String sql = " SELECT id, pass, name FROM Member "
-				+" WHERE id=? AND pass=? ";
+				+" WHERE id=? ";
 		try {
 			psmt = con.prepareStatement(sql);
 			psmt.setString(1, id);
-			psmt.setString(2, pwd);
 			rs = psmt.executeQuery();
 			if (rs.next()) {
 				maps.put("id", rs.getString("id"));
