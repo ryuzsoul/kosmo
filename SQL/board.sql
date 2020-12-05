@@ -96,3 +96,23 @@ SELECT * FROM(
 )
 WHERE rNum BETWEEN 1 AND 10
 ; 
+
+CREATE TABLE myfile(
+  idx NUMBER PRIMARY KEY,
+  name VARCHAR2(50) NOT NULL,
+  title VARCHAR2(200) NOT NULL,
+  inter VARCHAR2(100),
+  ofile VARCHAR2(100) NOT NULL,
+  sfile VARCHAR2(50) NOT NULL,;
+  
+  
+  
+  create table myfile (
+    idx number primary key,
+    name varchar2(50) not null,
+    title varchar2(200) not null,
+    inter varchar2(100),
+    ofile varchar2(100) not null,
+    sfile varchar2(30) not null,
+    postdate date default sysdate
+);
