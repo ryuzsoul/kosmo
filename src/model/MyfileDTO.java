@@ -8,7 +8,7 @@ public class MyfileDTO {
 	 private String inter;
 	 private String ofile;	//원본파일명
 	 private String sfile;	//서버에 저장된 파일명
-	 private String postdat;
+	 private String postdate;
 	 
 	public String getIdx() {
 		return idx;
@@ -46,11 +46,11 @@ public class MyfileDTO {
 	public void setSfile(String sfile) {
 		this.sfile = sfile;
 	}
-	public String getPostdat() {
-		return postdat;
+	public String getPostdate() {
+		return postdate;
 	}
-	public void setPostdat(String postdat) {
-		this.postdat = postdat;
+	public void setPostdate(String postdate) {
+		this.postdate = postdate;
 	}
 	 
 }

@@ -10,6 +10,50 @@
     </taglib>
   </jsp-config>
   
+  <servlet>
+    <servlet-name>NoJSPServlet</servlet-name>
+    <servlet-class>servlet.NoJSPServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NoJSPServlet</servlet-name>
+    <url-pattern>/Study/Servlet/NoJSPServlet.do</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>HelloServlet</servlet-name>
+    <servlet-class>servlet.HelloServlet</servlet-class>
+    <init-param>
+      <param-name>HELLO</param-name>
+      <param-value>하잇.web.xml에서 출력</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelloServlet</servlet-name>
+    <url-pattern>/Study/Servlet/HelloServlet.do</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+  <servlet>
+    <servlet-name>SimpleMVC</servlet-name>
+    <servlet-class>servlet.SimpleMVC</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SimpleMVC</servlet-name>
+    <url-pattern>/Study/Servlet/SimpleMVC</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 모델2방식 서블릿 게시판 -->
+  <servlet>
+    <servlet-name>DataRoomList</servlet-name>
+    <servlet-class>controller.ListCtrl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DataRoomList</servlet-name>
+    <url-pattern>/Study/DataRoom/DataList</url-pattern>
+  </servlet-mapping>
+  
    <!-- Server connection -->
    <context-param>
   	<param-name>JDBCDriver</param-name>

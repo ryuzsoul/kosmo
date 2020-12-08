@@ -13,9 +13,10 @@ request.setCharacterEncoding("UTF-8");
 String drv = application.getInitParameter("JDBCDriver");
 String url = application.getInitParameter("ConnectionURL");
 
-BbsDAO dao = new BbsDAO(drv, url);
+// BbsDAO dao = new BbsDAO(drv, url);
 Map<String, Object> param = new HashMap<String, Object>();
 
+BbsDAO dao = new BbsDAO();
 
 String searchColumn = request.getParameter("searchColumn");
 String searchWord = request.getParameter("searchWord");

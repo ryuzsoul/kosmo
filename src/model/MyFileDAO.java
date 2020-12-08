@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
+import java.util.Vector;
 
 import javax.servlet.ServletContext;
 
@@ -44,5 +46,29 @@ public class MyFileDAO {
 			e.printStackTrace();
 		}
 		return affected;
+	}
+	
+	public List<MyfileDTO> myfileList() {
+		List<MyfileDTO> fileList = new Vector<MyfileDTO>();
+		String sql = 
+				" SELECT * FROM Myfile WHERE 1=1 ORDER BY idx DESC ";
+		try {
+			psmt = con.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				MyfileDTO dto = new MyfileDTO();
+				dto.setIdx(rs.getString(1));
+				dto.setName(rs.getString(2));
+				dto.setTitle(rs.getString(3));
+				dto.setInter(rs.getString(4));
+				dto.setOfile(rs.getString(5));
+				dto.setSfile(rs.getString(6));
+				dto.setPostdate(rs.getString(7));
+				fileList.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return fileList;
 	}
 }

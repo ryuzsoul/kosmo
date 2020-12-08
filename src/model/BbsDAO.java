@@ -9,7 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.servlet.ServletContext;
+import javax.sql.DataSource;
 
 public class BbsDAO {
 	Connection con;
@@ -46,6 +49,22 @@ public class BbsDAO {
 			System.out.println("DB연결 성공");
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 커넥션풀을 이용한 생성자
+	 */
+	public BbsDAO() {
+		try {
+			
+			Context initctx = new InitialContext(); 
+			Context ctx = (Context)initctx.lookup("java:comp/env"); 
+			DataSource source = (DataSource)ctx.lookup("jdbc/myoracle"); 
+			con = source.getConnection();
+			System.out.println("DBCP연결 성공");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
