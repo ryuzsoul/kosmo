@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- <%@ include file="../common/isLogin.jsp" %> --%>
-
 <!DOCTYPE html>
 <html lang="en">
 <jsp:include page="../common/BoardHead.jsp"/>
@@ -16,7 +14,7 @@
     <jsp:include page="../common/BoardLeft.jsp"/>
     <div class="col-9 pt-3">
       <!-- 게시판 body 시작 -->    
-      <h3>게시판-<small>글쓰기</small></h3>
+      <h3>자료실-<small>${param.mode }비밀번호 검증</small></h3>
       <script>
 //        내가해보던거
 //        function checkValidate(fm) {
@@ -39,8 +37,11 @@
           }
         }
       </script>
-      <form name="writeFrm" method="post" action="../DataRoom/DataWrite" 
-          onsubmit="return checkValidate(this);" enctype="multipart/form-data">
+      <form name="writeFrm" method="post" action="../DataRoom/DataPassword" 
+          onsubmit="return checkValidate(this);">
+        <input type="hidden" name="idx" value="${param.idx }" />
+        <input type="hidden" name="mode" value="${param.mode }" />
+        
         <div class="row mt-3 mr-1">
           <table class="table table-bordered table-striped">
               <colgroup>
@@ -48,14 +49,8 @@
                 <col width="*"/>
               </colgroup>
               <tbody>
+              
               <tr>
-                  <th class="text-center"
-                    style="vertical-align:middle;">작성자</th>
-                  <td>
-                    <input type="text" class="form-control" 
-                      name="name" />
-                  </td>
-                </tr><tr>
                   <th class="text-center"
                     style="vertical-align:middle;">비밀번호</th>
                   <td>
@@ -63,29 +58,7 @@
                       name="pass" />
                   </td>
                 </tr>
-                <tr>
-                  <th class="text-center"
-                    style="vertical-align:middle;">제목</th>
-                  <td>
-                    <input type="text" class="form-control" 
-                      name="title" />
-                  </td>
-                </tr>
-                <tr>
-                  <th class="text-center"
-                    style="vertical-align:middle;">내용</th>
-                  <td>
-                    <textarea rows="10" 
-                      class="form-control" name="content"></textarea>
-                  </td>
-                </tr>
-               <tr>
-                 <th class="text-center"
-                   style="vertical-align:middle;">첨부파일</th>
-                 <td>
-                   <input type="file" class="form-control" name="attachedfile" />
-                 </td>
-               </tr>
+                
               </tbody>
           </table>
         </div>
@@ -102,7 +75,8 @@
             <button type="button" class="btn btn-link">Link</button> -->
             <button type="submit" class="btn btn-danger">전송하기</button>
             <button type="reset" class="btn btn-dark">Reset</button>
-            <button type="button" class="btn btn-warning" onclick="location.href='BoardList.jsp';">리스트보기</button>
+            <button type="button" class="btn btn-warning" 
+              onclick="location.href='/Study/DataRoom/DataList';">리스트보기</button>
           </div>
         </div>
       </form>

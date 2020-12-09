@@ -103,7 +103,7 @@
 						<!-- 각종 버튼 부분 -->
 						<!--          <button type="button" class="btn">Basic</button> -->
 						<button type="button" class="btn btn-primary">
-							<a href="/Study/DataRoom/DataWrite">글쓰기</a>
+							<a href="../DataRoom/DataWrite">글쓰기</a>
 						</button>
 						<!--          <button type="button" class="btn btn-secondary">수정하기</button> -->
 						<!--          <button type="button" class="btn btn-success">삭제하기</button> -->

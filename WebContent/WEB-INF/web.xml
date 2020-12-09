@@ -1,85 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>Kosmo</display-name>
-  
-  <!-- Taglib tld location -->
-  <jsp-config>
-    <taglib>
-      <taglib-uri>myTagLibTld</taglib-uri>
-      <taglib-location>/WEB-INF/tlds/MyTagLib.tld</taglib-location>
-    </taglib>
-  </jsp-config>
-  
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>Kosmo</display-name>
+
+	<!-- Taglib tld location -->
+	<jsp-config>
+		<taglib>
+			<taglib-uri>myTagLibTld</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/MyTagLib.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+
+	<servlet>
+		<servlet-name>NoJSPServlet</servlet-name>
+		<servlet-class>servlet.NoJSPServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NoJSPServlet</servlet-name>
+		<url-pattern>/Study/Servlet/NoJSPServlet.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>HelloServlet</servlet-name>
+		<servlet-class>servlet.HelloServlet</servlet-class>
+		<init-param>
+			<param-name>HELLO</param-name>
+			<param-value>하잇.web.xml에서 출력</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HelloServlet</servlet-name>
+		<url-pattern>/Study/Servlet/HelloServlet.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SimpleMVC</servlet-name>
+		<servlet-class>servlet.SimpleMVC</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SimpleMVC</servlet-name>
+		<url-pattern>/Study/Servlet/SimpleMVC</url-pattern>
+	</servlet-mapping>
+
+	<!-- 모델2방식 서블릿 게시판 -->
+	<servlet>
+		<servlet-name>DataRoomList</servlet-name>
+		<servlet-class>controller.ListCtrl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DataRoomList</servlet-name>
+		<url-pattern>/Study/DataRoom/DataList</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DataRoomWrite</servlet-name>
+		<servlet-class>controller.WriteCtrl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DataRoomWrite</servlet-name>
+		<url-pattern>/Study/DataRoom/DataWrite</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+    <servlet-name>DataRoomView</servlet-name>
+    <servlet-class>controller.ViewCtrl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DataRoomView</servlet-name>
+    <url-pattern>/Study/DataRoom/DataView</url-pattern>
+  </servlet-mapping>
+
   <servlet>
-    <servlet-name>NoJSPServlet</servlet-name>
-    <servlet-class>servlet.NoJSPServlet</servlet-class>
+    <servlet-name>DataRoomPassword</servlet-name>
+    <servlet-class>controller.PasswordCtrl</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>NoJSPServlet</servlet-name>
-    <url-pattern>/Study/Servlet/NoJSPServlet.do</url-pattern>
+    <servlet-name>DataRoomPassword</servlet-name>
+    <url-pattern>/Study/DataRoom/DataPassword</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
-    <servlet-name>HelloServlet</servlet-name>
-    <servlet-class>servlet.HelloServlet</servlet-class>
-    <init-param>
-      <param-name>HELLO</param-name>
-      <param-value>하잇.web.xml에서 출력</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>HelloServlet</servlet-name>
-    <url-pattern>/Study/Servlet/HelloServlet.do</url-pattern>
-  </servlet-mapping>
-  
-  
-  
-  
+
   <servlet>
-    <servlet-name>SimpleMVC</servlet-name>
-    <servlet-class>servlet.SimpleMVC</servlet-class>
+    <servlet-name>DataRoomDelete</servlet-name>
+    <servlet-class>controller.DeleteCtrl</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>SimpleMVC</servlet-name>
-    <url-pattern>/Study/Servlet/SimpleMVC</url-pattern>
+    <servlet-name>DataRoomDelete</servlet-name>
+    <url-pattern>/Study/DataRoom/DataDelete</url-pattern>
   </servlet-mapping>
   
-  <!-- 모델2방식 서블릿 게시판 -->
-  <servlet>
-    <servlet-name>DataRoomList</servlet-name>
-    <servlet-class>controller.ListCtrl</servlet-class>
+   <servlet>
+    <servlet-name>DataRoomEdit</servlet-name>
+    <servlet-class>controller.EditCtrl</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>DataRoomList</servlet-name>
-    <url-pattern>/Study/DataRoom/DataList</url-pattern>
+    <servlet-name>DataRoomEdit</servlet-name>
+    <url-pattern>/Study/DataRoom/DataEdit</url-pattern>
   </servlet-mapping>
-  
-   <!-- Server connection -->
-   <context-param>
-  	<param-name>JDBCDriver</param-name>
-  	<param-value>oracle.jdbc.OracleDriver</param-value>
-  </context-param>
-  <context-param>
-  	<param-name>ConnectionURL</param-name>
-  	<param-value>jdbc:oracle:thin:@localhost:1521:orcl</param-value>
-  </context-param>
-  
-    <!-- Pagination -->
-    <context-param>
-    <param-name>PAGE_SIZE</param-name>
-    <param-value>7</param-value>
-  </context-param>  
-  <context-param>
-    <param-name>BLOCK_PAGE</param-name>
-    <param-value>3</param-value>
-  </context-param>
-  
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
+
+	<!-- Server connection -->
+	<context-param>
+		<param-name>JDBCDriver</param-name>
+		<param-value>oracle.jdbc.OracleDriver</param-value>
+	</context-param>
+	<context-param>
+		<param-name>ConnectionURL</param-name>
+		<param-value>jdbc:oracle:thin:@localhost:1521:orcl</param-value>
+	</context-param>
+
+	<!-- Pagination -->
+	<context-param>
+		<param-name>PAGE_SIZE</param-name>
+		<param-value>7</param-value>
+	</context-param>
+	<context-param>
+		<param-name>BLOCK_PAGE</param-name>
+		<param-value>3</param-value>
+	</context-param>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>

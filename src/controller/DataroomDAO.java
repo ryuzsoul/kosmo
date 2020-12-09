@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Vector;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
 
@@ -25,6 +27,19 @@ public class DataroomDAO {
 			Context ctx = (Context)initCtx.lookup("java:comp/env");
 			DataSource source = (DataSource)ctx.lookup("jdbc/myoracle");
 			con = source.getConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public DataroomDAO(ServletContext ctx) {
+		try {
+			Class.forName(ctx.getInitParameter("JDBCDriver"));
+			String id = "kosmo";
+			String pw = "1234";
+			con = DriverManager.getConnection(
+					ctx.getInitParameter("ConnectionURL"), id, pw);
+			System.out.println("DB연결 성공");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -110,6 +125,96 @@ public class DataroomDAO {
 			psmt.setString(5, dto.getPass());
 			
 			affected = psmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return affected;
+	}
+	
+	public void updateVisitCount(String idx) {
+		String sql = " UPDATE Dataroom SET visitcount = visitcount+1 WHERE idx = ? ";
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, idx);
+			psmt.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	public DataroomDTO selectView(String idx) {
+		DataroomDTO dto = null;
+		String sql = " SELECT * FROM Dataroom WHERE idx = ? ";
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, idx);
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				dto = new DataroomDTO();
+				dto.setIdx(rs.getString(1));
+				dto.setName(rs.getString(2));
+				dto.setTitle(rs.getString(3));
+				dto.setContent(rs.getString(4));
+				dto.setPostdate(rs.getDate(5));
+				dto.setAttachedfile(rs.getString(6));
+				dto.setDowncount(rs.getInt(7));
+				dto.setPass(rs.getString(8));
+				dto.setVisitcount(rs.getInt(9));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+	
+	public boolean isCorrectPassword(String pass, String idx) {
+		boolean isCorr = true;
+		try {
+			String sql = " SELECT COUNT(*) FROM Dataroom WHERE pass = ? AND idx = ? ";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, pass);
+			psmt.setString(2, idx);
+			rs = psmt.executeQuery();
+			rs.next();
+			if (rs.getInt(1)==0) {
+				isCorr = false;
+			}
+		} catch (Exception e) {
+			isCorr = false;
+			e.printStackTrace();
+		}
+		return isCorr;
+	}
+	
+	public int delete(String idx) {
+		int affected = 0;
+		try {
+			String sql = " DELETE FROM Dataroom WHERE idx = ? ";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, idx);
+			affected = psmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return affected;
+	}
+	
+	public int update(DataroomDTO dto) {
+		int affected = 0;
+		try {
+			String sql = " UPDATE Dataroom "
+					+ " SET title=?, name=?, content=?, attachedfile=?, pass=? "
+					+ " WHERE idx=? ";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getName());
+			psmt.setString(3, dto.getContent());
+			psmt.setString(4, dto.getAttachedfile());
+			psmt.setString(5, dto.getPass());
+			psmt.setString(6, dto.getIdx());
+			
+			affected  = psmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

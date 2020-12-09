@@ -26,7 +26,7 @@ public class WriteCtrl extends HttpServlet{
 			String title = mr.getParameter("title");
 			String pass = mr.getParameter("pass");
 			String content = mr.getParameter("content");
-			String attachedfile = mr.getFilesystemName("name");
+			String attachedfile = mr.getFilesystemName("attachedfile");
 			
 			DataroomDTO dto = new DataroomDTO();
 			dto.setAttachedfile(attachedfile);
@@ -49,5 +49,10 @@ public class WriteCtrl extends HttpServlet{
 			req.getRequestDispatcher("/Study/DataRoom/DataWrite.jsp").forward(req, resp);
 		}
 		
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doPost(req, resp);
 	}
 }

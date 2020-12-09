@@ -1,4 +1,3 @@
-SELECT * FROM Dataroom;
 
 CREATE TABLE Dataroom(
 	idx NUMBER PRIMARY KEY,
@@ -11,7 +10,6 @@ CREATE TABLE Dataroom(
 	pass VARCHAR2(30) NOT NULL,
 	visitcount VARCHAR2(5) DEFAULT 0 NOT NULL
 );
-DROP TABLE Dataroom;
 
 CREATE SEQUENCE seq_board_dataroom
 	INCREMENT BY 1

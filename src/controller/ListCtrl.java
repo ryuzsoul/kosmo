@@ -16,39 +16,37 @@ public class ListCtrl extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //		req.setAttribute("test", "매핑확인용");
 //		req.getRequestDispatcher("/Study/DataRoom/DataList.jsp").forward(req, resp);
-		String subPath = req.getPathInfo();
-		System.out.println(subPath);
 		
+//		테스트실패
+//		String subPath = req.getPathInfo();
+//		System.out.println(subPath);
+//		if (subPath.equals("/DataList")) {
+//		} else {
+//		}
 		
-		if (subPath.equals("/DataList")) {
-			
-			DataroomDAO dao = new DataroomDAO();
-			Map param = new HashMap();
-			String addQueryString = "";
-			
-			String searchColumn = req.getParameter("searchColumn");
-			String searchWord = req.getParameter("searchWord");
-			if (searchColumn!=null) {
-				addQueryString = 
-						String.format("searchColumn=%s&searchWord=%s&", searchColumn, searchWord);
-				param.put("Coloumn", searchColumn);
-				param.put("Word", searchWord);
-			}
-			int totalRecordCount = dao.getTotalRecordCount(param);
-			param.put("totalCount", totalRecordCount);
-			
-			List<DataroomDTO> lists = dao.selectList(param);
-			
-			dao.close();
-			
-			req.setAttribute("lists", lists);
-			req.setAttribute("map", param);
-			req.getRequestDispatcher("/Study/DataRoom/DataList.jsp").forward(req, resp);
-			System.out.println("if문진입");
-			
-		} else {
-
+		DataroomDAO dao = new DataroomDAO();
+		Map param = new HashMap();
+		String addQueryString = "";
+		
+		String searchColumn = req.getParameter("searchColumn");
+		String searchWord = req.getParameter("searchWord");
+		if (searchColumn!=null) {
+			addQueryString = 
+					String.format("searchColumn=%s&searchWord=%s&", searchColumn, searchWord);
+			param.put("Coloumn", searchColumn);
+			param.put("Word", searchWord);
 		}
+		int totalRecordCount = dao.getTotalRecordCount(param);
+		param.put("totalCount", totalRecordCount);
+		
+		List<DataroomDTO> lists = dao.selectList(param);
+		
+		dao.close();
+		
+		req.setAttribute("lists", lists);
+		req.setAttribute("map", param);
+		req.getRequestDispatcher("/Study/DataRoom/DataList.jsp").forward(req, resp);
+		System.out.println("if문진입");
 	}	
 	
 	@Override
