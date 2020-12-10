@@ -98,6 +98,15 @@
     <servlet-name>DataRoomEdit</servlet-name>
     <url-pattern>/Study/DataRoom/DataEdit</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>DataRoomDownload</servlet-name>
+    <servlet-class>controller.DownloadCtrl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DataRoomDownload</servlet-name>
+    <url-pattern>/Study/DataRoom/Download</url-pattern>
+  </servlet-mapping>
 
 	<!-- Server connection -->
 	<context-param>

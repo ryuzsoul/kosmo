@@ -36,7 +36,15 @@ public class WriteCtrl extends HttpServlet{
 			dto.setPass(pass);
 			
 			DataroomDAO dao = new DataroomDAO();
+			//자료 100개 입력
+//			sucOrFail = 1;
+//			for (int i = 0; i < 100; i++) {
+//				dto.setTitle("자료실"+i+"번 포스팅");
+//				dao.insert(dto);
+//			}
 			sucOrFail = dao.insert(dto);
+			
+			
 			dao.close();
 		} else {
 			sucOrFail = -1;

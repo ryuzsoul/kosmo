@@ -220,4 +220,54 @@ public class DataroomDAO {
 		}
 		return affected;
 	}
+	
+	public void downCountPlus(String idx) {
+		String sql = " UPDATE Dataroom SET downcount = downcount+1 WHERE idx = ? ";
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, idx);
+			psmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public List<DataroomDTO> selectListPage(Map map) {
+		List<DataroomDTO> bbs = new Vector<DataroomDTO>();
+		String sql = " SELECT * FROM( "
+				+ "		SELECT Tb.*, ROWNUM rNum FROM( "
+				+ "			SELECT * FROM Dataroom ";
+		if(map.get("Word")!=null) {
+			sql += " WHERE "+map.get("Column")+" LIKE '%"+map.get("Word")+"%' ";
+		}
+		sql += " ORDER BY idx DESC "
+			+ "	) Tb "
+			+ " ) "
+			+ "WHERE rNum BETWEEN ? AND ? ";
+		System.out.println("sql="+sql);
+		
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setInt(1, Integer.parseInt(map.get("start").toString()));
+			psmt.setInt(2, Integer.parseInt(map.get("end").toString()));
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				DataroomDTO dto = new DataroomDTO();
+				dto.setIdx(rs.getString(1));
+				dto.setName(rs.getString(2));
+				dto.setTitle(rs.getString(3));
+				dto.setContent(rs.getString(4));
+				dto.setPostdate(rs.getDate(5));
+				dto.setAttachedfile(rs.getString(6));
+				dto.setDowncount(rs.getInt(7));
+				dto.setPass(rs.getString(8));
+				dto.setVisitcount(rs.getInt(9));
+				bbs.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bbs;
+	}
 }

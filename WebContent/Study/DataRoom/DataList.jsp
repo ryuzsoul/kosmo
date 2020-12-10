@@ -118,6 +118,10 @@
 				<div class="row mt-3">
 					<div class="col">
 						<!-- 페이지번호 부분 -->
+						<div style="text-align:center; padding:0 0 10px 0;">
+						  ${map.pagingImg }
+						</div>
+						
 						<ul class="pagination justify-content-center">
 
 							<!--            (게시물전체개수, 한페이지에 출력할 게시물, 한블록에 표시할 페이지, 현재페이지번호, 실행 파일명) -->
